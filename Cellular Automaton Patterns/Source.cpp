@@ -14,6 +14,7 @@ typedef struct cell {
 	int state;
 }cell;
 cell matrix[row][col];
+int index = 0;
 
 void set_squres(void);
 void generation(void);
@@ -50,7 +51,8 @@ int main()
 			}
 		}
 
-		generation();
+		if (index < row - 1)
+			generation();
 
 		window.clear();
 
@@ -64,17 +66,15 @@ int main()
 
 void generation(void)
 {
-	static int i = 0;
-
 	for (int j = 0; j < col; j++)
 	{
 		//change rule number here
-		matrix[i + 1][j].state = Rule_99(i, j);
+		matrix[index + 1][j].state = Rule_99(index, j);
 
-		if (matrix[i + 1][j].state == 1)
-			matrix[i + 1][j].rect.setFillColor(Color::Black);
+		if (matrix[index + 1][j].state == 1)
+			matrix[index + 1][j].rect.setFillColor(Color::Black);
 	}
-	i++;
+	index++;
 }
 
 /////////////////////////////////////////////////////////
